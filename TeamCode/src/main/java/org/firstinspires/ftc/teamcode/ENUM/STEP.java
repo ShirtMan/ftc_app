@@ -1,0 +1,7 @@
+package org.firstinspires.ftc.teamcode.ENUM;
+
+public enum STEP {
+
+    DROPANDCHECK, KNOCKJEWEL, KNOCKFRONTJEWEL, KNOCKBACKJEWEL, MOVETOSAFEZONE, PUTGLYPHIN
+
+}

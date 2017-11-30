@@ -28,7 +28,7 @@ public class TeleBop extends OpMode{
     @Override
     public void loop() {
 
-        robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_y, gamepad1.left_stick_x, powerMultiple);
+        robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x, powerMultiple);
 
         robot.glyphLifter.moveLift(gamepad2.right_stick_y);
 

@@ -96,6 +96,21 @@ public class MecanumDrive {
 
 
             }
+            public void moveForward(){
+
+                setThrottle(DRIVE_SPEED);
+
+            }
+            public void moveBackward(){
+
+                setThrottle(-DRIVE_SPEED);
+
+            }
+            public void stopMovement(){
+
+                setThrottle(0);
+
+            }
 
 
             public DcMotor getFL(){

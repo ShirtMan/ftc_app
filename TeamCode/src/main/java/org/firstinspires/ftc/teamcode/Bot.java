@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Hardware.GlyphGrabber;
 import org.firstinspires.ftc.teamcode.Hardware.GlyphLifter;
+import org.firstinspires.ftc.teamcode.Hardware.JewelArm;
 import org.firstinspires.ftc.teamcode.Hardware.MecanumDrive;
 
 /**
@@ -17,6 +18,7 @@ public class Bot {
     public GlyphLifter glyphLifter = new GlyphLifter();
     public GlyphGrabber glyphGrabber = new GlyphGrabber();
     public MecanumDrive drive = new MecanumDrive();
+    public JewelArm jewelArm = new JewelArm();
 
     public Bot(){
 
@@ -31,6 +33,7 @@ public class Bot {
         glyphLifter.init(hardwareMap, telemetry);
         glyphGrabber.init(hardwareMap, telemetry);
         drive.init(hardwareMap, telemetry);
+        jewelArm.init(hardwareMap, telemetry);
 
         telemetry.update();
 
