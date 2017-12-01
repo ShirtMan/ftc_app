@@ -30,7 +30,7 @@ public class TeleBop extends OpMode{
 
         robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x, powerMultiple);
 
-        robot.glyphLifter.moveLift(gamepad2.right_stick_y);
+        robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);
 
         if (gamepad2.right_bumper){
 
