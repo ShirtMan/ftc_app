@@ -106,6 +106,11 @@ public class MecanumDrive {
                 setThrottle(-DRIVE_SPEED);
 
             }
+			public void turn(){
+			
+				setTurnPower(TURN_SPEED);
+				
+			}
             public void stopMovement(){
 
                 setThrottle(0);
