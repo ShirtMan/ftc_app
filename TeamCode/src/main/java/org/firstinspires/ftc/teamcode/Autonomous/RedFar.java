@@ -38,59 +38,36 @@ public class RedFar extends LinearOpMode {
         
         waitForStart();
 
-        while(opModeIsActive()) {
+        robot.jewelArm.setArmDown();
+        sleep(1000);
+        
+        backJewel = robot.jewelArm.getBackJewel();
+        if (backJewel == BLUE) {
+            robot.drive.moveForward();
+            sleep(750);
+            robot.drive.stopMovement();
+            robot.jewelArm.setArmUp();    
 
-            switch (autoStep) {
+        } else if (backJewel == RED) {
 
-                case DROPANDCHECK: {
+            robot.drive.moveBackward();
+            sleep(750);
+            robot.drive.stopMovement();
+            robot.jewelArm.setArmUp();
 
-                    backJewel = robot.jewelArm.getBackJewel();
-
-                    if (backJewel == BLUE) {
-
-                        autoStep = KNOCKBACKJEWEL;
-
-                    } else if (backJewel == RED) {
-
-                        autoStep = KNOCKFRONTJEWEL;
-
-                    } else {
-
-                        autoStep = MOVETOSAFEZONE;
-
-                    }
-                    break;
-                }
-                case KNOCKFRONTJEWEL: {
-
-
-                    robot.drive.moveForward();
-                    sleep(750);
-                    robot.drive.stopMovement();
-                    robot.jewelArm.setArmUp();
-                    autoStep = MOVETOSAFEZONE;
-                    break;
-                }
-                case KNOCKBACKJEWEL: {
-
-                    robot.drive.moveBackward();
-                    sleep(750);
-                    robot.drive.stopMovement();
-                    robot.jewelArm.setArmUp();
-                    autoStep = MOVETOSAFEZONE;
-                    break;
-                }
-                case MOVETOSAFEZONE: {
                     
-                    robot.drive.moveForward();
-                    sleep(1000);
-                    robot.drive.stopMovement();
+        } else {
+            
+            robot.jewelArm.setArmAway();
+            
+        } 
+        robot.drive.turn();
+        sleep(500);
+        robot.drive.stopMovement();
+        robot.drive.moveForward();
+        sleep(1000);
+        robot.drive.stopMovement();
                     
-                }
-
-
-            }
-
-        }
+              
     }
 }
