@@ -5,22 +5,24 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.Bot;
-import org.firstinspires.ftc.teamcode.ENUM.COLORS;
-import org.firstinspires.ftc.teamcode.ENUM.STEP;
-
-import static org.firstinspires.ftc.teamcode.ENUM.COLORS.BLUE;
-import static org.firstinspires.ftc.teamcode.ENUM.COLORS.RED;
-import static org.firstinspires.ftc.teamcode.ENUM.STEP.KNOCKBACKJEWEL;
-import static org.firstinspires.ftc.teamcode.ENUM.STEP.KNOCKFRONTJEWEL;
-import static org.firstinspires.ftc.teamcode.ENUM.STEP.KNOCKJEWEL;
-import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 
 /**
  * Created by mcshirt on 11/29/17.
  */
 @Autonomous (name = "AutoRedFar", group = "Main")
 public class RedFar extends LinearOpMode {
-
+    
+    enum JewelColor{
+        
+        BLUE, RED, UNDEFINED
+           
+    }
+    enum Steps{
+     
+        DROPANDCHECK, KNOCKBACKJEWEL, KNOCKFRONTJEWEL, MOVETOSAFEZONE, PUTGLYPHIN
+        
+    }
+    
     Bot robot = new Bot();
 
     private STEP autoStep;
@@ -32,6 +34,8 @@ public class RedFar extends LinearOpMode {
 
         robot.init(hardwareMap, telemetry);
 
+        autoStep = DROPANDCHECK;
+        
         waitForStart();
 
         while(opModeIsActive()) {
@@ -64,7 +68,8 @@ public class RedFar extends LinearOpMode {
                     sleep(750);
                     robot.drive.stopMovement();
                     robot.jewelArm.setArmUp();
-
+                    autoStep = MOVETOSAFEZONE;
+                    break;
                 }
                 case KNOCKBACKJEWEL: {
 
@@ -72,7 +77,15 @@ public class RedFar extends LinearOpMode {
                     sleep(750);
                     robot.drive.stopMovement();
                     robot.jewelArm.setArmUp();
-
+                    autoStep = MOVETOSAFEZONE;
+                    break;
+                }
+                case MOVETOSAFEZONE: {
+                    
+                    robot.drive.moveForward();
+                    sleep(1000);
+                    robot.drive.stopMovement();
+                    
                 }
 
 
