@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class GlyphLifter {
 
-    private DcMotor glyphLifter;
+    private DcMotor topLift, bottomLift;
 
     public GlyphLifter(){
 
@@ -27,18 +27,17 @@ public class GlyphLifter {
 
     private void initialize(HardwareMap hardwareMap, Telemetry telemetry) {
 
-        glyphLifter = hardwareMap.get(DcMotor.class, "glyphLifter");
-
-        glyphLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        glyphLifter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        topLift  = = hardwareMap.get(DcMotor.class, "topLifter");
+        bottomLift = = hardwareMap.get(DcMotor.class, "backLifter");
+        topLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         telemetry.addData("GlyphLifter: ", "Done");
     }
 
-    public void moveLift(double power){
+    public void moveLift(double topPower, double bottomPower){
 
-        glyphLifter.setPower(power);
+        topLift.setPower(topPower);
+        bottomLift.setPower(bottomPower);
 
     }
 
