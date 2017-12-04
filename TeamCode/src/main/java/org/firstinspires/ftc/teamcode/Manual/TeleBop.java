@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Manual;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Bot;
 
@@ -23,6 +24,8 @@ public class TeleBop extends OpMode{
 
         powerMultiple = 1;
 
+
+
     }
 
     @Override
@@ -30,15 +33,16 @@ public class TeleBop extends OpMode{
 
         robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x, powerMultiple);
 
-        robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);
+        robot.glyphLifter.moveLift(gamepad2.right_stick_y, -gamepad2.left_stick_y);
 
-        if (gamepad2.right_bumper){
-
-            robot.glyphGrabber.openGrabber();
-
-        } else if (gamepad2.left_bumper) {
+        if (gamepad2.left_bumper){
 
             robot.glyphGrabber.openSmallAmount();
+
+
+        } else if (gamepad2.right_bumper) {
+
+            robot.glyphGrabber.openGrabber();
 
         } else {
 

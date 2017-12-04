@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class GlyphLifter {
 
-    private DcMotor topLift, bottomLift;
+    private DcMotor smallLifter, glyphLifter;
 
     public GlyphLifter(){
 
@@ -27,34 +27,34 @@ public class GlyphLifter {
 
     private void initialize(HardwareMap hardwareMap, Telemetry telemetry) {
 
-        topLift  = = hardwareMap.get(DcMotor.class, "topLifter");
-        bottomLift = = hardwareMap.get(DcMotor.class, "backLifter");
-        topLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        glyphLifter = hardwareMap.get(DcMotor.class, "glyphLifter");
+        smallLifter = hardwareMap.get(DcMotor.class, "smallLifter");
+
+        glyphLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        smallLifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        glyphLifter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         telemetry.addData("GlyphLifter: ", "Done");
     }
 
-    public void moveLift(double topPower, double bottomPower){
+    public void moveLift(double bigPower, double smallPower){
 
-        topLift.setPower(topPower);
-        bottomLift.setPower(bottomPower);
+        glyphLifter.setPower(bigPower);
+        smallLifter.setPower(smallPower);
+    }
+
+    public void stopMovement(){
+
+        glyphLifter.setPower(0);
+        smallLifter.setPower(0);
+
 
     }
 
-    public void nudge(int position){
+    public void nudge(){
 
-        glyphLifter.setTargetPosition(position);
-
-        glyphLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        glyphLifter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        glyphLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        glyphLifter.setPower(0.5);
-
-        while(glyphLifter.isBusy()){
-
-        }
-
-        glyphLifter.setPower(0);
+        glyphLifter.setPower(1);
 
     }
 

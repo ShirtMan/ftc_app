@@ -23,7 +23,7 @@ public class JewelArm {
 
 
     private final double ARM_UP_POS = 0;
-    private final double ARM_DOWN_POS = 0.7;
+    private final double ARM_DOWN_POS = 1;
     private final double ARM_AWAY_POS = 0.3;
 
     public JewelArm(){

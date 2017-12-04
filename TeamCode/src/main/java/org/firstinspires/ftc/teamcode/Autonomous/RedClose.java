@@ -18,8 +18,8 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 /**
  * Created by mcshirt on 11/29/17.
  */
-@Autonomous (name = "AutoRedFar", group = "Main")
-public class RedFar extends LinearOpMode {
+@Autonomous (name = "AutoRedClose", group = "Main")
+public class RedClose extends LinearOpMode {
 
     Bot robot = new Bot();
 
@@ -31,77 +31,79 @@ public class RedFar extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        robot.init(hardwareMap,telemetry);
+        robot.init(hardwareMap, telemetry);
 
         robo = 0;
 
         waitForStart();
 
-            robot.jewelArm.setArmAway();
-            robot.jewelArm.setArmDown();
-            sleep(1000);
-            backJewel = robot.jewelArm.getBackJewel();
-
-            if (backJewel == BLUE) {
-
-                robot.drive.setTurnPower(0.2);
-                sleep(1000);
-                robot.drive.stopMovement();
-                robot.drive.setTurnPower(-0.2);
-                sleep(1100);
-                robot.drive.stopMovement();
-                robot.jewelArm.setArmUp();
-
-            } else if (backJewel == RED) {
-
-                robot.drive.setTurnPower(-0.2);
-                sleep(1000);
-                robot.drive.stopMovement();
-                robot.drive.setTurnPower(0.2);
-                sleep(1100);
-                robot.drive.stopMovement();
-                robot.jewelArm.setArmUp();
-
-            } else {
-
-                robot.jewelArm.setArmUp();
-
-            }
-            //break;
-
-
-        robot.drive.stopMovement();
-        robot.glyphGrabber.openGrabber();
-        sleep(500);
-        robot.glyphLifter.moveLift(0.4, 0);
-        sleep(1000);
-        robot.glyphLifter.stopMovement();
-
         /*
-        robot.drive.setTurnPower(0.3);
-        sleep(500);
-        robot.drive.setTurnPower(-0.3);
-        sleep(500);
-        robot.drive.stopMovement();
+                    robot.jewelArm.setArmDown();
+                    sleep(1000);
+                    backJewel = robot.jewelArm.getBackJewel();
 
+                    if (backJewel == BLUE) {
+
+                        robo = 1;
+
+                    } else if (backJewel == RED) {
+
+                        robo = 2;
+
+                    } else {
+
+                        robo = 3;
+
+                    }
+                    break;
+                }
+
+
+                    robot.drive.moveForward();
+                    sleep(750);
+                    robot.drive.stopMovement();
+                    robot.jewelArm.setArmUp();
+
+                    robot.drive.moveBackward();
+                    sleep(750);
+                    robot.drive.stopMovement();
+                    robot.jewelArm.setArmUp();
         */
+
+
+        /*BLUE
         robot.drive.moveForward();
         sleep(1000);
         robot.drive.stopMovement();
         robot.drive.setTurnPower(-0.4);
-        sleep(250);
+        sleep(350);
         robot.drive.stopMovement();
         robot.drive.moveForward();
         sleep(1000);
         robot.drive.stopMovement();
-        robot.glyphGrabber.closeGrabber();
         robot.drive.moveBackward();
         sleep(1000);
         robot.drive.moveForward();
         sleep(1000);
         robot.drive.moveBackward();
+        sleep(100);
+        robot.drive.stopMovement();
+        */
+
+        //PARK RED
+        robot.drive.moveForward();
+        sleep(1250);
+        robot.drive.stopMovement();
+        robot.drive.setTurnPower(0.4);
+        sleep(1000);
+        robot.drive.stopMovement();
+        robot.drive.moveForward();
+        sleep(500);
+        robot.drive.moveBackward();
         sleep(250);
         robot.drive.stopMovement();
+
+
 
     }
 }
