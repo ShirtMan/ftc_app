@@ -18,44 +18,34 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 /**
  * Created by mcshirt on 11/29/17.
  */
-@Autonomous (name = "AutoRedClose", group = "Main")
-public class RedClose extends LinearOpMode {
+@Autonomous (name = "AutoBlueFar", group = "Main")
+public class BlueFar extends LinearOpMode {
 
     Bot robot = new Bot();
 
     //STEP autoStep;
 
-    COLORS backJewel;
-
-    int robo;
     @Override
     public void runOpMode() {
 
-        robot.init(hardwareMap, telemetry);
-
-        robo = 0;
+        robot.init(hardwareMap,telemetry);
 
         waitForStart();
 
         robot.drive.stopMovement();
-        robot.glyphGrabber.closeGrabber();
+        robot.glyphGrabber.openGrabber();
         sleep(500);
         robot.glyphLifter.moveLift(0.4, 0);
         sleep(1000);
         robot.glyphLifter.stopMovement();
 
-        //PARK RED
         robot.drive.moveForward();
-        sleep(1250);
-        robot.drive.stopMovement();
-        robot.drive.setTurnPower(0.4);
-        sleep(1000);
-        robot.drive.stopMovement();
-        robot.glyphGrabber.openGrabber();
-        robot.drive.moveBackward();
-        sleep(750);
+        sleep(2500);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
+        robot.drive.moveBackward();
+        sleep(1000);
+        robot.drive.stopMovement();
         sleep(500);
         robot.drive.setThrottle(0.3);
         sleep(2000);
@@ -64,8 +54,6 @@ public class RedClose extends LinearOpMode {
         robot.drive.moveBackward();
         sleep(250);
         robot.drive.stopMovement();
-
-
 
     }
 }

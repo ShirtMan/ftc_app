@@ -31,13 +31,15 @@ public class TeleBop extends OpMode{
     @Override
     public void loop() {
 
-        robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x, powerMultiple);
+        robot.drive.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, powerMultiple);
 
-        robot.glyphLifter.moveLift(gamepad2.right_stick_y, -gamepad2.left_stick_y);
 
-        if (gamepad2.left_bumper){
 
-            robot.glyphGrabber.openSmallAmount();
+        robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);
+
+        if (gamepad2.right_trigger > 0){
+
+            robot.glyphGrabber.setBothPosition(0.5);
 
 
         } else if (gamepad2.right_bumper) {
@@ -51,14 +53,13 @@ public class TeleBop extends OpMode{
         }
 
         if (gamepad1.left_stick_button){
-
-            if(powerMultiple == 1) {
+                powerMultiple = 0.9;
+        } else if (gamepad1.right_stick_button) {
                 powerMultiple = 0.6;
-            } else {
+        } else {
                 powerMultiple = 1;
-            }
-
         }
+
 
     }
 }

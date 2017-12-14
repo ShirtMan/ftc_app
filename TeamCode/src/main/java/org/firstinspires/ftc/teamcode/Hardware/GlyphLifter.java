@@ -44,6 +44,13 @@ public class GlyphLifter {
         smallLifter.setPower(smallPower);
     }
 
+    public void moveLiftInACoolWay(double power){
+
+        glyphLifter.setPower(power);
+        smallLifter.setPower(power * 0.75);
+
+    }
+
     public void stopMovement(){
 
         glyphLifter.setPower(0);

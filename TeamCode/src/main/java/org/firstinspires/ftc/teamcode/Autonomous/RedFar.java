@@ -37,6 +37,7 @@ public class RedFar extends LinearOpMode {
 
         waitForStart();
 
+        /*
             robot.jewelArm.setArmAway();
             robot.jewelArm.setArmDown();
             sleep(1000);
@@ -69,9 +70,9 @@ public class RedFar extends LinearOpMode {
             }
             //break;
 
-
+*/
         robot.drive.stopMovement();
-        robot.glyphGrabber.openGrabber();
+        robot.glyphGrabber.closeGrabber();
         sleep(500);
         robot.glyphLifter.moveLift(0.4, 0);
         sleep(1000);
@@ -86,19 +87,18 @@ public class RedFar extends LinearOpMode {
 
         */
         robot.drive.moveForward();
-        sleep(1000);
+        sleep(2500);
         robot.drive.stopMovement();
-        robot.drive.setTurnPower(-0.4);
-        sleep(250);
-        robot.drive.stopMovement();
-        robot.drive.moveForward();
-        sleep(1000);
+        robot.glyphGrabber.openGrabber();
+        robot.drive.moveBackward();
+        sleep(750);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
-        robot.drive.moveBackward();
-        sleep(1000);
-        robot.drive.moveForward();
-        sleep(1000);
+        sleep(500);
+        robot.drive.setThrottle(0.3);
+        sleep(2000);
+        robot.drive.stopMovement();
+        sleep(500);
         robot.drive.moveBackward();
         sleep(250);
         robot.drive.stopMovement();

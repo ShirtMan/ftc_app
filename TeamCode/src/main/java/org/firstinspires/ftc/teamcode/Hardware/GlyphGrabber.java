@@ -17,10 +17,10 @@ public class GlyphGrabber {
 
     private double subtraction;
 
-    private final double SERVO_LEFT_CLOSED_POS = 0.3;
-    private final double SERVO_LEFT_OPEN_POS = 0.7;
-    private final double SERVO_RIGHT_CLOSED_POS = 0.7;
-    private final double SERVO_RIGHT_OPEN_POS = 0.3;
+    private final double SERVO_LEFT_CLOSED_POS = 1;
+    private final double SERVO_LEFT_OPEN_POS = 0.3;
+    private final double SERVO_RIGHT_CLOSED_POS = 0;
+    private final double SERVO_RIGHT_OPEN_POS = 0.7;
 
     public GlyphGrabber(){
 
@@ -40,6 +40,13 @@ public class GlyphGrabber {
         rightSide.setPosition(1);
 
         telemetry.addData("GlyphGrabbers: ", "Done");
+    }
+
+    public void setBothPosition(double gamepadValue){
+
+        leftSide.setPosition(gamepadValue);
+        rightSide.setPosition(gamepadValue);
+
     }
 
     public void openGrabber(){

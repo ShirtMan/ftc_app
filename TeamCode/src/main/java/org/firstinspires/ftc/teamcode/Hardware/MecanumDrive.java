@@ -12,11 +12,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class MecanumDrive {
 
-            public DcMotor FL, FR, BL, BR;
+    private DcMotor FL, FR, BL, BR;
 
-            public double powerMultiplier;
+    private double powerMultiplier;
 
-    static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
+    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) /
             (WHEEL_DIAMETER_INCHES * Math.PI);
@@ -77,20 +77,23 @@ public class MecanumDrive {
 
             }
 
-            public void forwardDriveInches(int inches) {
-                int targetTicks = 0;
+            public void forwardDriveEncoder(int rotations) {
 
-                targetTicks = 1440 * inches;
+                int targetTicks;
+
+                targetTicks = 1120 * rotations;
+
+                FR.setTargetPosition(targetTicks);
 
                 FR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                FR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                FR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 // Wait for encoders reset
                 while (FR.getCurrentPosition() != 0){}
 
                 setThrottle(0.4);
 
-                while (FR.getCurrentPosition() < targetTicks) {}
+                while (FR.isBusy()) {}
 
                 setThrottle(0);
 
@@ -148,6 +151,24 @@ public class MecanumDrive {
                 motorVals[1] = left_stick_y + right_stick_x - left_stick_x;
                 motorVals[2] = left_stick_y - right_stick_x + left_stick_x;
                 motorVals[3] = left_stick_y - right_stick_x - left_stick_x;
+
+                //Adjust range to that allowed by DcMotors
+                motorVals = mapValues(motorVals, -1, 1);
+                //Set power to motors11
+                FL.setPower(motorVals[0] * powerMultiplier);
+                BL.setPower(motorVals[1] * powerMultiplier);
+                BR.setPower(motorVals[2] * powerMultiplier);
+                FR.setPower(motorVals[3] * powerMultiplier);
+
+            }
+            public void tankDrive(float left_stick_y, float right_stick_x, double powerMultiplier){
+
+                float[] motorVals = {0, 0, 0, 0};
+
+                motorVals[0] = left_stick_y + right_stick_x;
+                motorVals[1] = left_stick_y + right_stick_x;
+                motorVals[2] = left_stick_y - right_stick_x;
+                motorVals[3] = left_stick_y - right_stick_x;
 
                 //Adjust range to that allowed by DcMotors
                 motorVals = mapValues(motorVals, -1, 1);
