@@ -17,18 +17,20 @@ import static org.firstinspires.ftc.teamcode.ENUM.COLORS.UNDEFINED;
 
 public class JewelArm {
 
-    private Servo jewelArm;
-    private ColorSensor colorSensor;
-    private COLORS jewelColor;
+    private Servo arm;
+    private Servo knocker;
+    //private ColorSensor colorSensor;
+    //private COLORS jewelColor;
 
 
     private final double ARM_UP_POS = 0;
     private final double ARM_DOWN_POS = 1;
     private final double ARM_AWAY_POS = 0.3;
 
-    public JewelArm(){
+    public JewelArm() {
 
     }
+
     public void init(HardwareMap hardwareMap, Telemetry telemetry) {
         this.initialize(hardwareMap, telemetry);
     }
@@ -36,32 +38,58 @@ public class JewelArm {
 
     private void initialize(HardwareMap hardwareMap, Telemetry telemetry) {
 
-        jewelArm = hardwareMap.get(Servo.class, "jewelArm");
-        colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
+        arm = hardwareMap.get(Servo.class, "jArm");
+        //knocker = hardwareMap.get(Servo.class, "jHitter");
+        //colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
+        //hitterStraight();
         setArmUp();
 
         telemetry.addData("JewelArm: ", "Done");
     }
 
-    public void setArmUp(){
+    public void setArmUp() {
 
-        jewelArm.setPosition(ARM_UP_POS);
-
-    }
-    public void setArmDown(){
-
-        jewelArm.setPosition(ARM_DOWN_POS);
-
-    }
-    public void setArmAway(){
-
-        jewelArm.setPosition(ARM_AWAY_POS);
+        arm.setPosition(ARM_UP_POS);
 
     }
 
-    public COLORS getBackJewel(){
+    public void setArmDown() {
 
+        arm.setPosition(ARM_DOWN_POS);
+
+    }
+
+    public void setArmAway() {
+
+        arm.setPosition(ARM_AWAY_POS);
+
+    }
+
+    /*public void hitBackJewel() {
+
+        knocker.setPosition(1);
+
+    }
+
+    public void hitFrontJewel() {
+
+        knocker.setPosition(0.3);
+
+    }
+    public void hitterStraight(){
+
+        knocker.setPosition(0.8);
+
+    }
+    public void setHitterPos(double position){
+
+        knocker.setPosition(position);
+
+    }*/
+
+    public COLORS getBackJewel() {
+/*
         if (colorSensor.blue() > colorSensor.red()){
 
             jewelColor = BLUE;
@@ -78,5 +106,7 @@ public class JewelArm {
 
         return jewelColor;
     }
-
+*/
+        return BLUE;
+    }
 }
