@@ -59,10 +59,28 @@ public class GlyphLifter {
 
     }
 
-    public void nudge(){
+    public void encoderDrive(double speed,
+                             int newPos, DcMotorSimple.Direction direction) {
 
-        glyphLifter.setPower(1);
+            smallLifter.setDirection(direction);
+            //glyphLifter.setDirection(direction);
 
-    }
+            smallLifter.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+            smallLifter.setTargetPosition(newPos);
+
+            smallLifter.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            smallLifter.setPower(Math.abs(speed));
+            //glyphLifter.setPower(Math.abs(speed) * 0.75);
+
+            while (smallLifter.isBusy()) {
+
+            }
+
+            smallLifter.setPower(0);
+            // z g lyphLifter.setPower(0);
+
+            smallLifter.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
 }

@@ -18,7 +18,7 @@ public class Bot {
     public GlyphLifter glyphLifter = new GlyphLifter();
     public GlyphGrabber glyphGrabber = new GlyphGrabber();
     public MecanumDrive drive = new MecanumDrive();
-    public JewelArm jewelArm = new JewelArm();
+    //public JewelArm jewelArm = new JewelArm();
 
     public Bot(){
 
@@ -33,7 +33,7 @@ public class Bot {
         glyphLifter.init(hardwareMap, telemetry);
         glyphGrabber.init(hardwareMap, telemetry);
         drive.init(hardwareMap, telemetry);
-        jewelArm.init(hardwareMap, telemetry);
+        //jewelArm.init(hardwareMap, telemetry);
 
         telemetry.update();
 

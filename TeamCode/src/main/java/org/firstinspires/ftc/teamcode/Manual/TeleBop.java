@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Manual;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Bot;
 
@@ -15,6 +16,8 @@ public class TeleBop extends OpMode{
 
     Bot robot = new Bot();
 
+    Servo jArm;
+
     double powerMultiple;
 
     @Override
@@ -24,15 +27,21 @@ public class TeleBop extends OpMode{
 
         powerMultiple = 1;
 
+        jArm = hardwareMap.servo.get("jArm");
 
+    }
 
+    @Override
+    public void start(){
+
+        robot.glyphGrabber.openGrabber();
+        jArm.setPosition(0);
     }
 
     @Override
     public void loop() {
 
-        robot.drive.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, powerMultiple);
-
+        robot.drive.mecanumDrive(gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x, powerMultiple);
 
 
         robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);

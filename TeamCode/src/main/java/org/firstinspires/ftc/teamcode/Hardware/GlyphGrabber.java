@@ -36,9 +36,6 @@ public class GlyphGrabber {
         leftSide = hardwareMap.get(Servo.class, "leftGrabbers");
         rightSide = hardwareMap.get(Servo.class, "rightGrabbers");
 
-        leftSide.setPosition(0);
-        rightSide.setPosition(1);
-
         telemetry.addData("GlyphGrabbers: ", "Done");
     }
 

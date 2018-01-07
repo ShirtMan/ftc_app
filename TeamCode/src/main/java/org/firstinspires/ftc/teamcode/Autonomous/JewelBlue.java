@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.Bot;
 public class JewelBlue extends LinearOpMode {
 
     private Bot bot = new Bot();
-    private ColorSensor colorSensor;
-    private Servo hitter;
+    ColorSensor colorSensor;
+    Servo hitter, arm;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,68 +24,37 @@ public class JewelBlue extends LinearOpMode {
 
         colorSensor = hardwareMap.colorSensor.get("colorSensor");
         hitter = hardwareMap.servo.get("jHitter");
+        arm = hardwareMap.servo.get("jArm");
 
-        int robo = 0;
+        hitter.setPosition(0);
+        arm.setPosition(0);
 
         waitForStart();
 
-        while(opModeIsActive()){
+        hitter.setPosition(0.5);
+        sleep(1000);
+        arm.setPosition(0.4);
+        sleep(500);
+        arm.setPosition(0.55);
+        sleep(2000);
+        telemetry.addData("Color Data: ", colorSensor.blue() + " " + colorSensor.red());
 
-            switch(robo){
-                case 0: {
+        if (colorSensor.red() > colorSensor.blue()){
 
-                    hitter.setPosition(0.5);
-                    sleep(1000);
-                    bot.jewelArm.setArmDown();
-                    sleep(2000);
-                    robo++;
-                    break;
-                }
-                case 1: {
-
-                    telemetry.addData("Color Data: ", colorSensor.blue() + " " + colorSensor.red());
-
-                    sleep(1000);
-
-                    if (colorSensor.red() > colorSensor.blue()){
-
-                        telemetry.addData("JEWEL: ", "RED");
-                        hitter.setPosition(0);
-                        robo++;
-
-                    }
-                    if (colorSensor.blue() > colorSensor.red()) {
-
-                        telemetry.addData("JEWEL: ", "BLUE");
-                        hitter.setPosition(1);
-                        robo++;
-                        break;
-
-                    }
-
-                    break;
-                }
-                case 2: {
-
-                    telemetry.update();
-                    hitter.setPosition(0.5);
-                    bot.jewelArm.setArmAway();
-                    hitter.setPosition(0);
-                    sleep(500);
-                    robo++;
-                    break;
-                }
-
-                case 3:
-
-
-                    break;
-
-            }
+            telemetry.addData("JEWEL: ", "RED");
+            hitter.setPosition(0);
 
         }
+        if (colorSensor.blue() > colorSensor.red()) {
 
+            telemetry.addData("JEWEL: ", "BLUE");
+            hitter.setPosition(1);
+        }
+        sleep(2000);
+        telemetry.update();
+        hitter.setPosition(0.5);
+        arm.setPosition(0);
+        hitter.setPosition(0);
+        sleep(3000);
     }
-
-
 }

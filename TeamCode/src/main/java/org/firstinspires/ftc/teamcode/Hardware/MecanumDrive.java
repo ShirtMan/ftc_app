@@ -99,6 +99,7 @@ public class MecanumDrive {
 
 
             }
+
             public void moveForward(){
 
                 setThrottle(DRIVE_SPEED);
@@ -116,7 +117,7 @@ public class MecanumDrive {
 			}
             public void stopMovement(){
 
-                setThrottle(0);
+                 setThrottle(0);
 
             }
 

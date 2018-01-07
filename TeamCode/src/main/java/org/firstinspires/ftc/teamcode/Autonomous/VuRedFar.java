@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.ENUM.COLORS;
 @Autonomous (name = "VuRedFar", group = "Main")
 public class VuRedFar extends LinearOpMode {
 
-    private Bot robot = new Bot();
+    Bot robot = new Bot();
     private long timeToTurn;
 
     VuforiaLocalizer vuforia;
@@ -61,7 +61,7 @@ public class VuRedFar extends LinearOpMode {
         telemetry.update();
 
         //TODO: JEWEL
-
+/*
         robot.jewelArm.setArmDown();
         if (robot.jewelArm.getBackJewel() == COLORS.BLUE) {
             turnForTime(0.2, 500);
@@ -69,7 +69,7 @@ public class VuRedFar extends LinearOpMode {
         } else if (robot.jewelArm.getBackJewel() == COLORS.RED){
             turnForTime(-0.2, 500);
             turnForTime(0.2, 500);
-        }
+        }*/
         turnForTime(-0.2, timeToTurn);
         moveForTime(1000);
         robot.glyphGrabber.openGrabber();
