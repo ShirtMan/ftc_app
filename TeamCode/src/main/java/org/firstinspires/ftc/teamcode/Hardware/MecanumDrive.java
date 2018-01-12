@@ -43,10 +43,12 @@ public class MecanumDrive {
                 FL.setDirection(DcMotorSimple.Direction.REVERSE);
                 BL.setDirection(DcMotorSimple.Direction.REVERSE);
 
-                FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                DcMotor.ZeroPowerBehavior zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE;
+
+                FL.setZeroPowerBehavior(zeroPowerBehavior);
+                FR.setZeroPowerBehavior(zeroPowerBehavior);
+                BL.setZeroPowerBehavior(zeroPowerBehavior);
+                BR.setZeroPowerBehavior(zeroPowerBehavior);
 
                 powerMultiplier = 1;
 
@@ -121,28 +123,15 @@ public class MecanumDrive {
 
             }
 
+            public void strafe(int direction, double power){
 
-            public DcMotor getFL(){
+                // 1 for right, -1 for left
 
-
-                return FL;
+                FL.setPower(1 * direction * power); // ik its the same thing but it looks nicer
+                BL.setPower(-1 * direction * power);
+                FR.setPower(-1 * direction * power);
+                BR.setPower(1 * direction * power);
             }
-            public DcMotor getFR(){
-
-
-                return FR;
-            }
-            public DcMotor getBL(){
-
-
-                return BL;
-            }
-            public DcMotor getBR(){
-
-
-                return BR;
-            }
-
 
             public void mecanumDrive(float left_stick_y, float right_stick_x, float left_stick_x, double powerMultiplier){
 

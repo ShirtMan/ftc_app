@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonomous;
+package org.firstinspires.ftc.teamcode.Autonomous.main;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -29,18 +29,18 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.KNOCKJEWEL;
 import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 
 /**
- * Created by mcshirt on 11/29/17.
+ * 7571 Made by Nick.
+ * If you took this code from GitHub,
+ * my only request is that you make it better
  */
-@Autonomous (name = "AutoRedClose", group = "Main")
-public class RedClose extends LinearOpMode {
 
+@Autonomous (name = "AutoBlueClose", group = "Main")
+public class BlueClose extends LinearOpMode {
 
     Bot robot = new Bot();
 
     ColorSensor colorSensor;
     Servo hitter, arm;
-
-    VuforiaLocalizer vuforia;
 
     BNO055IMU imu;
     Orientation angles;
@@ -54,22 +54,11 @@ public class RedClose extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        telemetry.addData("INIT: ", "NO ROCK");
+
         turnDone = false;
 
         robot.init(hardwareMap, telemetry);
-
-        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        VuforiaLocalizer.Parameters vuParameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
-
-        vuParameters.vuforiaLicenseKey = "AWBfzdD/////AAAAGVCvW8Pbe006tYtykMBPXLVPBGYjqVQYwwmptNffpYDItCTleQ3m5gWmb1lQOp3QOLrJ4H+wzdZjUmfNezFQ+zt7IhpvjTTgDJAc8ZW9NdtY/FrEykrOl80iaRK7RG4HxC2J7rwmoENM1LiwBr/K6i+YMHMIEnA1YlnYRSLynP2Juv7316t7stmeZ7SrwOYTe8IP1OVPpHZrUYQDdIFEam9JQDpCtccK11260ILLuLej+80tAokdu+nJh++uCrP1AT2nLEm9WaIjEbOv8efXpa5xKCuKze9SxnIIJYM4VNeV7GwCzUu7mneqtU0BRFt5XRn6viWvMHpCnc67LNzdxZZNi3fQESobUWpiwu8WZ0Ep";
-
-        vuParameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
-        this.vuforia = ClassFactory.createVuforiaLocalizer(vuParameters);
-
-        VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
-        VuforiaTrackable relicTemplate = relicTrackables.get(0);
-        relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
-
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -83,8 +72,6 @@ public class RedClose extends LinearOpMode {
 
         angle = 0;
         nowAngle = getCurrentAngle();
-
-        int threshold = 10;
 
         firstTurn = true;
 
@@ -115,13 +102,13 @@ public class RedClose extends LinearOpMode {
         if (colorSensor.red() > colorSensor.blue()){
 
             telemetry.addData("JEWEL: ", "RED");
-            hitter.setPosition(1);
+            hitter.setPosition(0);
 
         }
         if (colorSensor.blue() > colorSensor.red()) {
 
             telemetry.addData("JEWEL: ", "BLUE");
-            hitter.setPosition(0);
+            hitter.setPosition(1);
         }
         sleep(2000);
         telemetry.update();
@@ -136,32 +123,13 @@ public class RedClose extends LinearOpMode {
         sleep(2000);
 
 
-        robot.drive.setThrottle(0.2);
-/*
-        RelicRecoveryVuMark vuMark a= RelicRecoveryVuMark.from(relicTemplate);
-
-        while (opModeIsActive() && (vuMark == null || vuMark == RelicRecoveryVuMark.UNKNOWN)){
-
-            telemetry.addData("WE ", "GOIN");
-
-        }
-
-        // either do some crappy angle crap or do sleeps OR encoders?
-
-        if (vuMark == RelicRecoveryVuMark.LEFT) {
-            threshold = 30;
-        } else if (vuMark == RelicRecoveryVuMark.CENTER) {
-            threshold = 55;
-        } else if (vuMark == RelicRecoveryVuMark.RIGHT) {
-            threshold = 80;
-        }
-*/
-        //threshold = -100;
+        robot.drive.setThrottle(-0.2);
         sleep(2500);
         robot.drive.stopMovement();
 
-        moveToAngle(-88);
+        moveToAngle(-90);
 
+        sleep(500);
         robot.drive.setThrottle(0.4);
         sleep(1000);
         robot.drive.stopMovement();
@@ -202,7 +170,7 @@ public class RedClose extends LinearOpMode {
 
     public void moveToAngle(int targetAngle){
 
-        robot.drive.setTurnPower(0.25);
+        robot.drive.setTurnPower(0.20);
 
         while(opModeIsActive() && !turnDone) {
             if (getCurrentAngle() <= targetAngle + 1 && getCurrentAngle() >= targetAngle - 1) {
@@ -213,7 +181,7 @@ public class RedClose extends LinearOpMode {
 
             } else if (getCurrentAngle() < targetAngle){
 
-                robot.drive.setTurnPower(0.25);
+                robot.drive.setTurnPower(-0.20);
 
             }
         }

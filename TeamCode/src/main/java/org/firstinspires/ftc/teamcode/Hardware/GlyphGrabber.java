@@ -62,8 +62,8 @@ public class GlyphGrabber {
 
     public void openSmallAmount(){
 
-        leftSide.setPosition(SERVO_LEFT_CLOSED_POS - 0.1);
-        rightSide.setPosition(SERVO_RIGHT_CLOSED_POS + 0.1);
+        leftSide.setPosition(0.5);
+        rightSide.setPosition(0.5);
 
     }
 
