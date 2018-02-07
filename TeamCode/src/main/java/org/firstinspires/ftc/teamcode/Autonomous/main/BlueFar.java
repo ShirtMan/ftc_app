@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Bot;
  * Created by mcshirt on 11/29/17.
  */
 
-@Autonomous (name = "AutoBlueFar", group = "Main")
+@Autonomous (name = "AutoBlueFartherThanEver", group = "Main")
 public class BlueFar extends LinearOpMode {
 
     Bot robot = new Bot();
@@ -64,7 +64,7 @@ public class BlueFar extends LinearOpMode {
         sleep(500);
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
 
-        hitter.setPosition(0.5);
+       /* hitter.setPosition(0.5);
         sleep(1000);
         arm.setPosition(0.4);
         sleep(500);
@@ -91,35 +91,36 @@ public class BlueFar extends LinearOpMode {
         arm.setPosition(0.1);
         sleep(250);
         hitter.setPosition(0);
-        sleep(2000);
+        sleep(2000);*/
 
-        robot.drive.setThrottle(-0.3);
+        robot.drive.setThrottle(0.3);
+        sleep(1500);
+        robot.drive.stopMovement();
+        robot.drive.strafe(1, 1);
+        sleep(250);
+        robot.drive.stopMovement();
+
         sleep(1000);
-        robot.drive.stopMovement();
-
-        robot.drive.strafe(-1, 0.75);
-        sleep(800);
-        robot.drive.stopMovement();
 
         moveToAngle(180);
 
         sleep(100);
-        robot.drive.setThrottle(0.3);
+        robot.drive.setThrottle(-0.25);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.openGrabber();
-        robot.drive.moveBackward();
+        robot.drive.setThrottle(0.3);
         sleep(500);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
         sleep(500);
-        robot.glyphLifter.encoderDrive(0.5, 1000, DcMotorSimple.Direction.REVERSE);
+        robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.REVERSE);
         sleep(200);
-        robot.drive.setThrottle(0.3);
-        sleep(2000);
+        robot.drive.setThrottle(-0.3);
+        sleep(750);
         robot.drive.stopMovement();
         sleep(500);
-        robot.drive.moveBackward();
+        robot.drive.setThrottle(0.3);
         sleep(250);
         robot.drive.stopMovement();
 
@@ -140,10 +141,10 @@ public class BlueFar extends LinearOpMode {
 
     public void moveToAngle(double targetAngle){
 
-        robot.drive.setTurnPower(-0.1);
+        robot.drive.setTurnPower(-0.17);
 
         while(opModeIsActive() && !turnDone) {
-            if (getCurrentAngle() <= targetAngle + 1 && getCurrentAngle() >= targetAngle - 1) {
+            if (getCurrentAngle() <= targetAngle + 5 && getCurrentAngle() >= targetAngle - 5) {
 
                 robot.drive.stopMovement();
                 telemetry.addData("TURN: ", "DONE");
@@ -151,7 +152,7 @@ public class BlueFar extends LinearOpMode {
 
             } else if (getCurrentAngle() < targetAngle){
 
-                robot.drive.setTurnPower(0.1);
+                robot.drive.setTurnPower(0.17);
 
             }
         }

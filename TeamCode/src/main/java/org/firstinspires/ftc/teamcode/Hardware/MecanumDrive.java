@@ -35,10 +35,10 @@ public class MecanumDrive {
 
             private void initialize(HardwareMap hardwareMap, Telemetry telemetry) {
 
-                FL = hardwareMap.get(DcMotor.class, "leftFront");
-                FR = hardwareMap.get(DcMotor.class, "rightFront");
-                BL = hardwareMap.get(DcMotor.class, "leftBack");
-                BR = hardwareMap.get(DcMotor.class, "rightBack");
+                FL = hardwareMap.get(DcMotor.class, "rightBack");
+                FR = hardwareMap.get(DcMotor.class, "leftBack");
+                BL = hardwareMap.get(DcMotor.class, "rightFront");
+                BR = hardwareMap.get(DcMotor.class, "leftFront");
 
                 FL.setDirection(DcMotorSimple.Direction.REVERSE);
                 BL.setDirection(DcMotorSimple.Direction.REVERSE);

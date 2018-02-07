@@ -48,18 +48,20 @@ public class TeleBop extends OpMode{
     public void start(){
 
         robot.glyphGrabber.openGrabber();
-        jArm.setPosition(0.1);
+
     }
 
     @Override
     public void loop() {
+
+        jArm.setPosition(0.1);
 
         if (gamepad1.right_bumper) {
             robot.drive.strafe(1, 1);
         } else if (gamepad1.left_bumper){
             robot.drive.strafe(-1, 1);
         } else {
-            robot.drive.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_x , powerMultiple);
+            robot.drive.tankDrive(gamepad1.left_stick_y, -gamepad1.right_stick_x , powerMultiple);
         }
 
         robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);
@@ -81,30 +83,51 @@ public class TeleBop extends OpMode{
             robot.glyphGrabber.closeGrabber();
         }
 
-        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
-        final    View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
-
         if (gamepad1.right_trigger > 0){
             powerMultiple = 0.75;
-            screenColor = Color.YELLOW;
+            int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+            final    View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+            relativeLayout.post(new Runnable() {
+                public void run() {
+                    relativeLayout.setBackgroundColor(Color.YELLOW);
+                }
+            });
+
         } else if (gamepad1.left_trigger > 0){
             powerMultiple = 0.3;
-            screenColor = Color.RED;
+            int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+            final    View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+            relativeLayout.post(new Runnable() {
+                public void run() {
+                    relativeLayout.setBackgroundColor(Color.RED);
+                }
+            });
         } else {
             powerMultiple = 1;
-            screenColor = Color.GREEN;
+            int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+            final    View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+            relativeLayout.post(new Runnable() {
+                public void run() {
+                    relativeLayout.setBackgroundColor(Color.GREEN);
+                }
+            });
         }
 
-        relativeLayout.post(new Runnable() {
-            public void run() {
-                relativeLayout.setBackgroundColor(screenColor);
-            }
-        });
+
 
     }
 
     @Override
     public void stop(){
+
+        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+        final    View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+
+        relativeLayout.post(new Runnable() {
+            public void run() {
+                relativeLayout.setBackgroundColor(Color.WHITE);
+            }
+        });
 
     }
 

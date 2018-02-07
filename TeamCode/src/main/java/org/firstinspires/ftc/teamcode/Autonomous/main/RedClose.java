@@ -31,7 +31,7 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 /**
  * Created by mcshirt on 11/29/17.
  */
-@Autonomous (name = "AutoRedClose", group = "Main")
+@Autonomous (name = "AutoRedCloserThanEver", group = "Main")
 public class RedClose extends LinearOpMode {
 
 
@@ -89,7 +89,7 @@ public class RedClose extends LinearOpMode {
         sleep(500);
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
 
-        hitter.setPosition(0.5);
+       /* hitter.setPosition(0.5);
         sleep(1000);
         arm.setPosition(0.4);
         sleep(500);
@@ -118,29 +118,29 @@ public class RedClose extends LinearOpMode {
         arm.setPosition(0);
         sleep(250);
         hitter.setPosition(0);
-        sleep(2000);
+        sleep(2000);*/
 
 
-        robot.drive.setThrottle(0.2);
-        sleep(2500);
+        robot.drive.setThrottle(0.3);
+        sleep(2350);
         robot.drive.stopMovement();
 
-        moveToAngle(-90);
+        moveToAngle(90);
 
-        robot.drive.setThrottle(0.4);
+        robot.drive.setThrottle(-0.4);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.openGrabber();
         sleep(750);
-        robot.drive.setThrottle(-0.2);
+        robot.drive.setThrottle(0.2);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.REVERSE);
-        robot.drive.setThrottle(0.2);
+        robot.drive.setThrottle(-0.2);
         sleep(1000);
         robot.drive.stopMovement();
-        robot.drive.setThrottle(-0.3);
+        robot.drive.setThrottle(0.3);
         sleep(500);
         robot.drive.stopMovement();
 

@@ -34,7 +34,7 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
  * my only request is that you make it better
  */
 
-@Autonomous (name = "AutoBlueClose", group = "Main")
+@Autonomous (name = "AutoBlueCloserThanEver", group = "Main")
 public class BlueClose extends LinearOpMode {
 
     Bot robot = new Bot();
@@ -91,7 +91,7 @@ public class BlueClose extends LinearOpMode {
         sleep(500);
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
 
-        hitter.setPosition(0.5);
+        /*hitter.setPosition(0.5);
         sleep(1000);
         arm.setPosition(0.4);
         sleep(500);
@@ -120,11 +120,11 @@ public class BlueClose extends LinearOpMode {
         arm.setPosition(0);
         sleep(250);
         hitter.setPosition(0);
+        sleep(2000);*/
+
+
+        robot.drive.setThrottle(-0.4);
         sleep(2000);
-
-
-        robot.drive.setThrottle(-0.2);
-        sleep(2500);
         robot.drive.stopMovement();
 
         moveToAngle(-90);
@@ -170,7 +170,7 @@ public class BlueClose extends LinearOpMode {
 
     public void moveToAngle(int targetAngle){
 
-        robot.drive.setTurnPower(0.20);
+        robot.drive.setTurnPower(-0.20);
 
         while(opModeIsActive() && !turnDone) {
             if (getCurrentAngle() <= targetAngle + 1 && getCurrentAngle() >= targetAngle - 1) {
@@ -181,7 +181,7 @@ public class BlueClose extends LinearOpMode {
 
             } else if (getCurrentAngle() < targetAngle){
 
-                robot.drive.setTurnPower(-0.20);
+                robot.drive.setTurnPower(0.20);
 
             }
         }

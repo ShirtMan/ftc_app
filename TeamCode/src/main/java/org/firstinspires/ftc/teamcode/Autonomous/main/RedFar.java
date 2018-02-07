@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Bot;
 /**
  * Created by mcshirt on 11/29/17.
  */
-@Autonomous (name = "AutoRedFar", group = "Main")
+@Autonomous (name = "AutoRedFartherThanEVer", group = "Main")
 public class RedFar extends LinearOpMode {
 
     Bot robot = new Bot();
