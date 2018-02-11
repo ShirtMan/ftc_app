@@ -67,7 +67,7 @@ public class RedFar extends LinearOpMode {
         sleep(1000);
         arm.setPosition(0.4);
         sleep(500);
-        arm.setPosition(0.6);
+        arm.setPosition(1);
         sleep(2000);
         telemetry.addData("Color Data: ", colorSensor.blue() + " " + colorSensor.red());
 
@@ -87,38 +87,40 @@ public class RedFar extends LinearOpMode {
         hitter.setPosition(0.5);
         arm.setPosition(0.4);
         sleep(250);
-        arm.setPosition(0.1);
+        arm.setPosition(0.2);
         sleep(250);
-        hitter.setPosition(0);
+        arm.setPosition(0);
+        sleep(250);
+        hitter.setPosition(1);
         sleep(2000);
 
-        robot.drive.setThrottle(0.3);
+        robot.drive.setThrottle(-0.3);
         sleep(1000);
         robot.drive.stopMovement();
 
-        robot.drive.strafe(-1, 0.75);
-        sleep(800);
+        robot.drive.strafe(1, 1);
+        sleep(350);
         robot.drive.stopMovement();
 
        // moveToAngle(startAngle);
 
         sleep(100);
-        robot.drive.setThrottle(0.3);
+        robot.drive.setThrottle(-0.3);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.openGrabber();
-        robot.drive.moveBackward();
+        robot.drive.setThrottle(0.3);
         sleep(500);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
         sleep(500);
         robot.glyphLifter.encoderDrive(0.5, 1000, DcMotorSimple.Direction.REVERSE);
         sleep(200);
-        robot.drive.setThrottle(0.3);
+        robot.drive.setThrottle(-0.3);
         sleep(2000);
         robot.drive.stopMovement();
         sleep(500);
-        robot.drive.moveBackward();
+        robot.drive.setThrottle(0.3);
         sleep(250);
         robot.drive.stopMovement();
 

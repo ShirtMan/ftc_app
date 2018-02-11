@@ -79,7 +79,7 @@ public class BlueClose extends LinearOpMode {
         hitter = hardwareMap.servo.get("jHitter");
         arm = hardwareMap.servo.get("jArm");
 
-        hitter.setPosition(0);
+        hitter.setPosition(1);
         arm.setPosition(0);
 
 
@@ -91,11 +91,11 @@ public class BlueClose extends LinearOpMode {
         sleep(500);
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
 
-        /*hitter.setPosition(0.5);
+        hitter.setPosition(0.5);
         sleep(1000);
         arm.setPosition(0.4);
         sleep(500);
-        arm.setPosition(0.55);
+        arm.setPosition(1);
         sleep(2000);
         telemetry.addData("Color Data: ", colorSensor.blue() + " " + colorSensor.red());
 
@@ -119,31 +119,31 @@ public class BlueClose extends LinearOpMode {
         sleep(250);
         arm.setPosition(0);
         sleep(250);
-        hitter.setPosition(0);
-        sleep(2000);*/
+        hitter.setPosition(1);
+        sleep(2000);
 
 
-        robot.drive.setThrottle(-0.4);
+        robot.drive.setThrottle(0.4);
         sleep(2000);
         robot.drive.stopMovement();
 
         moveToAngle(-90);
 
         sleep(500);
-        robot.drive.setThrottle(0.4);
+        robot.drive.setThrottle(-0.4);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.openGrabber();
         sleep(750);
-        robot.drive.setThrottle(-0.2);
+        robot.drive.setThrottle(0.2);
         sleep(1000);
         robot.drive.stopMovement();
         robot.glyphGrabber.closeGrabber();
         robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.REVERSE);
-        robot.drive.setThrottle(0.2);
+        robot.drive.setThrottle(-0.2);
         sleep(1000);
         robot.drive.stopMovement();
-        robot.drive.setThrottle(-0.3);
+        robot.drive.setThrottle(0.3);
         sleep(500);
         robot.drive.stopMovement();
 

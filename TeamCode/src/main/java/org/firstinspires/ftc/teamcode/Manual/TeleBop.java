@@ -57,11 +57,11 @@ public class TeleBop extends OpMode{
         jArm.setPosition(0.1);
 
         if (gamepad1.right_bumper) {
-            robot.drive.strafe(1, 1);
-        } else if (gamepad1.left_bumper){
             robot.drive.strafe(-1, 1);
+        } else if (gamepad1.left_bumper){
+            robot.drive.strafe(1, 1);
         } else {
-            robot.drive.tankDrive(gamepad1.left_stick_y, -gamepad1.right_stick_x , powerMultiple);
+            robot.drive.tankDrive(-gamepad1.left_stick_y, gamepad1.right_stick_x , powerMultiple);
         }
 
         robot.glyphLifter.moveLift(gamepad2.right_stick_y, gamepad2.left_stick_y);
