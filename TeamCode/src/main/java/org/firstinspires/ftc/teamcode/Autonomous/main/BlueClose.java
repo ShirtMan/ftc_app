@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.Bot;
 import org.firstinspires.ftc.teamcode.ENUM.COLORS;
 import org.firstinspires.ftc.teamcode.ENUM.STEP;
+import org.firstinspires.ftc.teamcode.Hardware.MecanumDrive;
 
 import static org.firstinspires.ftc.teamcode.ENUM.COLORS.BLUE;
 import static org.firstinspires.ftc.teamcode.ENUM.COLORS.RED;
@@ -37,7 +39,9 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 @Autonomous (name = "AutoBlueCloserThanEver", group = "Main")
 public class BlueClose extends LinearOpMode {
 
-    Bot robot = new Bot();
+    MecanumDrive drive = new MecanumDrive();
+
+    DcMotor intakeLeft, intakeRight, lifter, flipper;
 
     ColorSensor colorSensor;
     Servo hitter, arm;
@@ -58,7 +62,7 @@ public class BlueClose extends LinearOpMode {
 
         turnDone = false;
 
-        robot.init(hardwareMap, telemetry);
+        drive.init(hardwareMap, telemetry);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -86,10 +90,6 @@ public class BlueClose extends LinearOpMode {
         telemetry.addData("INIT: ", "WE ROCKIN");
 
         waitForStart();
-
-        robot.glyphGrabber.closeGrabber();
-        sleep(500);
-        robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
 
         hitter.setPosition(0.5);
         sleep(1000);
@@ -122,30 +122,21 @@ public class BlueClose extends LinearOpMode {
         hitter.setPosition(1);
         sleep(2000);
 
-
-        robot.drive.setThrottle(0.4);
+        drive.setThrottle(0.4);
         sleep(2000);
-        robot.drive.stopMovement();
+        drive.stopMovement();
 
         moveToAngle(-90);
 
-        sleep(500);
-        robot.drive.setThrottle(-0.4);
+        drive.setThrottle(0.25);
         sleep(1000);
-        robot.drive.stopMovement();
-        robot.glyphGrabber.openGrabber();
-        sleep(750);
-        robot.drive.setThrottle(0.2);
-        sleep(1000);
-        robot.drive.stopMovement();
-        robot.glyphGrabber.closeGrabber();
-        robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.REVERSE);
-        robot.drive.setThrottle(-0.2);
-        sleep(1000);
-        robot.drive.stopMovement();
-        robot.drive.setThrottle(0.3);
-        sleep(500);
-        robot.drive.stopMovement();
+        drive.stopMovement();
+
+        changeIntakePower(-1);
+        sleep(1500);
+        changeIntakePower(0);
+
+        moveToAngle(180);
 
         sleep(1000);
         stop();
@@ -170,20 +161,27 @@ public class BlueClose extends LinearOpMode {
 
     public void moveToAngle(int targetAngle){
 
-        robot.drive.setTurnPower(-0.20);
+        drive.setTurnPower(-0.20);
 
         while(opModeIsActive() && !turnDone) {
             if (getCurrentAngle() <= targetAngle + 1 && getCurrentAngle() >= targetAngle - 1) {
 
-                robot.drive.stopMovement();
+                drive.stopMovement();
                 telemetry.addData("TURN: ", "DONE");
                 turnDone = true;
 
             } else if (getCurrentAngle() < targetAngle){
 
-                robot.drive.setTurnPower(0.20);
+                drive.setTurnPower(0.20);
 
             }
         }
+    }
+
+    public void changeIntakePower(double power){
+
+        intakeLeft.setPower(power);
+        intakeRight.setPower(power);
+
     }
 }

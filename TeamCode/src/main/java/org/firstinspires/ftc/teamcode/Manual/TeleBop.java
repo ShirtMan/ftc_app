@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Bot;
  * Created by mcshirt on 11/21/17.
  */
 
-@TeleOp (name = "TeleBop", group = "TeleOp")
+@TeleOp (name = "Old TeleBop", group = "TeleOp")
 public class TeleBop extends OpMode{
 
     int screenColor;

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -20,6 +21,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.teamcode.Bot;
 import org.firstinspires.ftc.teamcode.ENUM.COLORS;
 import org.firstinspires.ftc.teamcode.ENUM.STEP;
+import org.firstinspires.ftc.teamcode.Hardware.MecanumDrive;
 
 import static org.firstinspires.ftc.teamcode.ENUM.COLORS.BLUE;
 import static org.firstinspires.ftc.teamcode.ENUM.COLORS.RED;
@@ -34,8 +36,9 @@ import static org.firstinspires.ftc.teamcode.ENUM.STEP.MOVETOSAFEZONE;
 @Autonomous (name = "AutoRedCloserThanEver", group = "Main")
 public class RedClose extends LinearOpMode {
 
+    MecanumDrive drive = new MecanumDrive();
 
-    Bot robot = new Bot();
+    DcMotor intakeLeft, intakeRight, lifter, flipper;
 
     ColorSensor colorSensor;
     Servo hitter, arm;
@@ -56,7 +59,7 @@ public class RedClose extends LinearOpMode {
 
         turnDone = false;
 
-        robot.init(hardwareMap, telemetry);
+        drive.init(hardwareMap, telemetry);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -80,20 +83,33 @@ public class RedClose extends LinearOpMode {
         hitter.setPosition(0);
         arm.setPosition(0);
 
+        intakeLeft = hardwareMap.dcMotor.get("intakeLeft");
+        intakeRight = hardwareMap.dcMotor.get("intakeRight");
+
+        lifter = hardwareMap.dcMotor.get("lifter");
+
+        flipper = hardwareMap.dcMotor.get("flipper");
+
+        intakeLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intakeRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        intakeRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        lifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        lifter.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        drive.init(hardwareMap, telemetry);
 
         telemetry.addData("INIT: ", "WE ROCKIN");
 
         waitForStart();
 
-        robot.glyphGrabber.closeGrabber();
-        sleep(500);
-        robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.FORWARD);
-
         hitter.setPosition(0.5);
         sleep(1000);
-        arm.setPosition(0.4);
+        arm.setPosition(0.75);
         sleep(500);
-        arm.setPosition(1);
+        arm.setPosition(0.35);
         sleep(2000);
         telemetry.addData("Color Data: ", colorSensor.blue() + " " + colorSensor.red());
 
@@ -120,29 +136,21 @@ public class RedClose extends LinearOpMode {
         hitter.setPosition(1);
         sleep(2000);
 
-
-        robot.drive.setThrottle(-0.3);
-        sleep(2350);
-        robot.drive.stopMovement();
+        drive.setThrottle(0.5);
+        sleep(2000);
+        drive.stopMovement();
 
         moveToAngle(90);
 
-        robot.drive.setThrottle(0.4);
+        drive.setThrottle(0.25);
         sleep(1000);
-        robot.drive.stopMovement();
-        robot.glyphGrabber.openGrabber();
+        drive.stopMovement();
+
+        changeIntakePower(-1);
         sleep(750);
-        robot.drive.setThrottle(-0.2);
-        sleep(1000);
-        robot.drive.stopMovement();
-        robot.glyphGrabber.closeGrabber();
-        robot.glyphLifter.encoderDrive(0.5, 1400, DcMotorSimple.Direction.REVERSE);
-        robot.drive.setThrottle(0.2);
-        sleep(1000);
-        robot.drive.stopMovement();
-        robot.drive.setThrottle(-0.3);
-        sleep(500);
-        robot.drive.stopMovement();
+        changeIntakePower(0);
+
+        moveToAngle(180);
 
         sleep(1000);
         stop();
@@ -167,20 +175,27 @@ public class RedClose extends LinearOpMode {
 
     public void moveToAngle(int targetAngle){
 
-        robot.drive.setTurnPower(0.20);
+        drive.setTurnPower(0.20);
 
         while(opModeIsActive() && !turnDone) {
             if (getCurrentAngle() <= targetAngle + 1 && getCurrentAngle() >= targetAngle - 1) {
 
-                robot.drive.stopMovement();
+                drive.stopMovement();
                 telemetry.addData("TURN: ", "DONE");
                 turnDone = true;
 
             } else if (getCurrentAngle() < targetAngle){
 
-                robot.drive.setTurnPower(-0.20);
+                drive.setTurnPower(-0.20);
 
             }
         }
+    }
+
+    public void changeIntakePower(double power){
+
+        intakeLeft.setPower(power);
+        intakeRight.setPower(power);
+
     }
 }
