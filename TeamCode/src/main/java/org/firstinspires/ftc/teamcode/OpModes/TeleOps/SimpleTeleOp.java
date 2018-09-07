@@ -14,7 +14,7 @@ public class SimpleTeleOp extends OpMode {
 
     @Override
     public void init() {
-
+        // wow Nick C sucks
         robot.init(hardwareMap, telemetry, DriveTrain.DriveTypes.TANK);
 
     }
