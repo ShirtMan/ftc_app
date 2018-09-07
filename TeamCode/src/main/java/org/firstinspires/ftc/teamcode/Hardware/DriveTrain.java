@@ -149,10 +149,10 @@ public class DriveTrain extends BaseHardware {
 
             case MECANUM:
 
-                FL.setPower(gamepad.left_stick_y + gamepad.right_stick_y + gamepad.left_stick_x);
-                FR.setPower(gamepad.left_stick_y - gamepad.right_stick_y + gamepad.left_stick_x);
-                BL.setPower(gamepad.left_stick_y + gamepad.right_stick_y - gamepad.left_stick_x);
-                BR.setPower(gamepad.left_stick_y - gamepad.right_stick_y - gamepad.left_stick_x);
+                FL.setPower(gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
+                FR.setPower(gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
+                BL.setPower(gamepad.left_stick_y + gamepad.right_stick_x - gamepad.left_stick_x);
+                BR.setPower(gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
 
                 break;
 
@@ -168,10 +168,10 @@ public class DriveTrain extends BaseHardware {
 
                 } else {
 
-                    FL.setPower(gamepad.left_stick_y + gamepad.right_stick_y);
-                    FR.setPower(gamepad.left_stick_y - gamepad.right_stick_y);
-                    BL.setPower(gamepad.left_stick_y + gamepad.right_stick_y);
-                    BR.setPower(gamepad.left_stick_y - gamepad.right_stick_y);
+                    FL.setPower(gamepad.left_stick_y + gamepad.right_stick_x);
+                    FR.setPower(gamepad.left_stick_y - gamepad.right_stick_x);
+                    BL.setPower(gamepad.left_stick_y + gamepad.right_stick_x);
+                    BR.setPower(gamepad.left_stick_y - gamepad.right_stick_x);
 
                 }
         }
