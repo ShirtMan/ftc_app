@@ -87,9 +87,9 @@ public class DriveTrain extends BaseHardware {
     public void strafe(double power){
 
         FL.setPower(-power);
-        FR.setPower(-power);
+        FR.setPower(power);
         BL.setPower(power);
-        BR.setPower(power);
+        BR.setPower(-power);
 
     }
 
@@ -150,9 +150,9 @@ public class DriveTrain extends BaseHardware {
             case MECANUM:
 
                 FL.setPower(gamepad.left_stick_y + gamepad.right_stick_x + gamepad.left_stick_x);
-                FR.setPower(gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
+                FR.setPower(gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
                 BL.setPower(gamepad.left_stick_y + gamepad.right_stick_x - gamepad.left_stick_x);
-                BR.setPower(gamepad.left_stick_y - gamepad.right_stick_x - gamepad.left_stick_x);
+                BR.setPower(gamepad.left_stick_y - gamepad.right_stick_x + gamepad.left_stick_x);
 
                 break;
 
